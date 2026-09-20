@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d10">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="12W Training">
+<title>12-Week Strength & Muscle Comeback</title>
+<style>
+:root{--bg:#0b0d10;--card:#14181d;--card2:#1b2027;--text:#eef2f5;--muted:#9ca7b3;--accent:#72e6a5;--warn:#ffd166;--line:#2a313a}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:28px 20px 18px;max-width:1100px;margin:auto} h1{margin:0 0 7px;font-size:28px} h2{margin:0 0 12px} h3{margin:0 0 8px}.sub{color:var(--muted)}
+nav{position:sticky;top:0;background:#0b0d10ee;backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:5}
+.navin{max-width:1100px;margin:auto;display:flex;gap:7px;padding:9px 12px;overflow:auto}
+button,.tab{border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 13px;border-radius:9px;cursor:pointer}.tab.active,button.primary{background:var(--accent);color:#07120c;border-color:var(--accent);font-weight:700}
+main{max-width:1100px;margin:18px auto;padding:0 14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}.stat{font-size:27px;font-weight:750}.muted{color:var(--muted)}.pill{display:inline-block;padding:4px 8px;border-radius:999px;background:var(--card2);font-size:12px;color:var(--muted)}
+table{width:100%;border-collapse:collapse}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}th{color:var(--muted);font-weight:600}
+input,select{width:100%;background:#0f1216;border:1px solid var(--line);border-radius:7px;color:var(--text);padding:8px}
+.small{font-size:12px}.hide{display:none}.week{border-left:3px solid var(--accent);padding-left:12px;margin:18px 0}.exercise{font-weight:650}.note{background:#10151a;border-radius:10px;padding:10px;color:var(--muted);margin-top:10px}
+.kpi{display:flex;gap:20px;flex-wrap:wrap}.kpi>div{min-width:120px}.good{color:var(--accent)}.warn{color:var(--warn)}
+@media(max-width:650px){h1{font-size:23px} th:nth-child(5),td:nth-child(5){display:none}}
+textarea{font-size:16px;box-sizing:border-box;resize:vertical}\n</style>
+<link rel="manifest" id="appManifest">
+<style>
+html{background:#0b0d10}
+body{padding-bottom:env(safe-area-inset-bottom);-webkit-tap-highlight-color:transparent}
+header{padding-top:calc(28px + env(safe-area-inset-top))}
+button,.tab,input,select{min-height:44px;font-size:16px}
+input,select{font-size:16px}
+button:active,.tab:active{transform:scale(.98)}
+</style>
+</head>
+<body>
+<header>
+<h1>12-Week Strength + Muscle Comeback</h1>
+<div class="sub">3 gym sessions/week · ~45–60 min · progressive overload · conditioning without sabotaging recovery</div>
+</header>
+<nav><div class="navin">
+<button class="tab active" data-tab="dashboard">Dashboard</button>
+<button class="tab" data-tab="plan">12-Week Plan</button>
+<button class="tab" data-tab="log">Workout Log</button>
+<button class="tab" data-tab="settings">Settings</button>
+</div></nav>
+<main>
+<section id="dashboard">
+<div class="card" style="margin-bottom:14px">
+<div class="muted">TODAY'S WORKOUT</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+<div><h2 id="todayTitle" style="margin:4px 0">Loading…</h2><div class="muted" id="todayMeta"></div></div>
+<button class="primary" id="startWorkout">Start workout</button>
+</div>
+</div>
+<div class="grid">
+<div class="card"><div class="muted">Current week</div><div class="stat" id="wk">1 / 12</div></div>
+<div class="card"><div class="muted">Sessions logged</div><div class="stat" id="sessions">0</div></div>
+<div class="card"><div class="muted">Completion</div><div class="stat" id="completion">0%</div></div>
+<div class="card"><div class="muted">Last bodyweight</div><div class="stat" id="dashWeight">—</div></div>
+</div>
+<div class="card" style="margin-top:14px">
+<h2>Quick status</h2><div id="today"></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>📱 Best on iPhone</h3><p class="muted">Open this file in Safari. Tap <b>Share → Add to Home Screen</b>. The app will then open like an app. Your workout data is stored on this iPhone in the browser.</p></div>
+<div class="grid" style="margin-top:14px">
+<div class="card"><h3>Rules</h3><ul class="muted">
+<li>Weeks 1–2: 3–4 reps in reserve.</li><li>Weeks 3–4: 2–3 RIR.</li><li>Weeks 5–8: mostly 1–2 RIR.</li><li>Weeks 9–11: strength/hypertrophy peak.</li><li>Week 12: deload + optional rep/strength checks.</li>
+</ul></div>
+<div class="card"><h3>Progression</h3><p class="muted">When every set reaches the top of its rep range with the target RIR, add the smallest practical load next time. Upper body: usually +1–2.5 kg. Lower body: usually +2.5–5 kg.</p></div>
+</div>
+</section>
+
+<section id="workout" class="hide">
+<div class="card">
+<div class="muted">ACTIVE SESSION</div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+<div><h2 id="workoutTitle">Session A</h2><div class="muted" id="workoutProgress">Exercise 1 of 6</div></div>
+<button id="finishWorkout">Finish</button>
+</div>
+<div id="exerciseCard" style="margin-top:16px"></div>
+<div style="display:flex;gap:8px;margin-top:14px">
+<button id="prevExercise">← Back</button><button class="primary" id="nextExercise" style="flex:1">Next →</button>
+</div>
+</div>
+<div class="card" style="margin-top:14px">
+<h3>Session note</h3>
+<textarea id="sessionNote" rows="3" style="width:100%;background:#0f1216;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:10px;font:16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" placeholder="Energy, pain, technique, anything worth remembering…"></textarea>
+</div>
+</section>
+
+<section id="plan" class="hide"></section>
+
+<section id="log" class="hide">
+<div class="card">
+<h2>History & data</h2>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button id="exportData">Export backup</button><button id="importData">Import backup</button><input id="importFile" type="file" accept=".json" style="display:none"></div>
+<div class="note">Your data lives on this iPhone. Export a backup occasionally so you can restore it after changing device/browser.</div>
+</div>
+<div class="card" style="margin-top:14px">
+<h2>Manual workout log</h2>
+<div class="grid">
+<label>Week<select id="logWeek"></select></label>
+<label>Session<select id="logSession"><option>A</option><option>B</option><option>C</option></select></label>
+<label>Date<input type="date" id="logDate"></label>
+<label>Bodyweight<input id="logBW" type="number" step="0.1" placeholder="optional"></label>
+<label>Session RPE<input id="logRPE" type="number" min="1" max="10" step="0.5" placeholder="1–10"></label>
+</div>
+<table id="logTable" style="margin-top:14px"></table>
+<div style="margin-top:12px"><button class="primary" id="saveLog">Save workout</button> <button id="clearLog">Clear form</button></div>
+</div>
+<div class="card" style="margin-top:14px"><h2>History</h2><div id="history"></div></div>
+</section>
+
+<section id="settings" class="hide">
+<div class="card">
+<h2>Personal setup</h2>
+<div class="grid">
+<label>Starting week<select id="startWeek"></select></label>
+<label>Weekly step target<input id="steps" type="number" value="9000"></label>
+<label>Protein target (g/day)<input id="protein" type="number" value="160"></label>
+<label>Default bodyweight<input id="weight" type="number" step="0.1"></label>
+</div>
+<p class="note">These are tracking targets, not medical prescriptions. If you have an injury, medical condition, or a long period of complete inactivity, get appropriate professional clearance before hard training.</p>
+<button class="primary" id="saveSettings">Save settings</button>
+<button id="resetAll" style="margin-left:8px">Reset all data</button>
+</div>
+</section>
+</main>
+<script>
+(function(){
+ const manifest={name:"12-Week Strength + Muscle",short_name:"12W Training",start_url:location.href,display:"standalone",background_color:"#0b0d10",theme_color:"#0b0d10"};
+ const blob=new Blob([JSON.stringify(manifest)],{type:"application/manifest+json"});
+ const link=document.getElementById("appManifest"); link.href=URL.createObjectURL(blob);
+})();
+
+const sessions={
+A:[
+["Back Squat","3","5–8"],["Incline Bench Press","3","6–10"],["Chin-up / Lat Pulldown","3","6–10"],["Romanian Deadlift","2","8–10"],["Lateral Raise","2","12–20"],["Ab Wheel / Cable Crunch","2","8–15"]],
+B:[
+["Trap-bar Deadlift","2","4–6"],["Overhead Press","3","6–10"],["Chest-supported Row","3","8–12"],["Bulgarian Split Squat","2","8–12 / leg"],["Dips","2","6–12"],["Hanging Knee/Leg Raise","2","8–15"]],
+C:[
+["Front Squat / Leg Press","3","6–10"],["Bench Press","3","5–8"],["Pull-up / Lat Pulldown","3","8–12"],["Hip Thrust / RDL","2","8–12"],["Cable/Lateral Raise","2","12–20"],["Biceps Curl","2","10–15"],["Triceps Extension","2","10–15"]]
+};
+const phases=[
+["Weeks 1–2","Re-entry","3–4 RIR","~60–70% of prior/current comfortable working loads"],
+["Weeks 3–4","Build","2–3 RIR","Add load gradually; still avoid grinders"],
+["Weeks 5–8","Productive training","1–2 RIR","Normal working loads; accessories can approach 0–1 RIR"],
+["Weeks 9–11","Peak rebuild","1–2 RIR","Heavy first lifts + hypertrophy work; no forced reps"],
+["Week 12","Deload / assess","3–4 RIR","~50–60% of normal set volume; optional rep/strength checks"]
+];
+let state=JSON.parse(localStorage.getItem("comeback12")||'{"week":1,"logs":[],"settings":{"steps":9000,"protein":160,"weight":""},"active":null}');
+function save(){localStorage.setItem("comeback12",JSON.stringify(state)); renderAll()}
+function phase(w){return w<=2?0:w<=4?1:w<=8?2:w<=11?3:4}
+function targetRIR(w){return w<=2?"3–4":w<=4?"2–3":w<=11?"1–2":"3–4"}
+function sessionTable(s,w){
+return `<table><thead><tr><th>Exercise</th><th>Sets</th><th>Reps</th><th>Load</th><th>Actual</th></tr></thead><tbody>`+
+sessions[s].map((e,i)=>`<tr><td class="exercise">${e[0]}</td><td>${e[1]}</td><td>${e[2]}</td><td><input class="load" data-i="${i}" placeholder="kg"></td><td><input class="actual" data-i="${i}" placeholder="e.g. 8,8,7"></td></tr>`).join("")+
+`</tbody></table><div class="note">Target RIR this week: <b>${targetRIR(w)}</b>. ${phases[phase(w)][3]}.</div>`;
+}
+function renderPlan(){
+let out=`<div class="card"><h2>Training architecture</h2><p class="muted">Train Mon/Wed/Fri when possible. Walk daily. Add 2 easy aerobic sessions (30–45 min) on non-lifting days. Keep cardio mostly conversational; avoid turning every session into HIIT.</p></div>`;
+for(let w=1;w<=12;w++){
+let p=phases[phase(w)];
+out+=`<div class="card week"><h2>Week ${w} · ${p[1]}</h2><span class="pill">${p[2]} RIR</span><span class="pill">${p[3]}</span>
+<div class="grid" style="margin-top:12px">${["A","B","C"].map(s=>`<div class="card"><h3>Session ${s}</h3>${sessionTable(s,w)}</div>`).join("")}</div>
+<div class="note"><b>Conditioning:</b> 2 × 30–45 min Zone 2/week. <b>Steps:</b> default ${state.settings.steps.toLocaleString()}/day. Week 12: cut lifting sets roughly in half.</div></div>`;
+}
+document.getElementById("plan").innerHTML=out;
+}
+function renderLog(){
+let w=+document.getElementById("logWeek").value||state.week,s=document.getElementById("logSession").value;
+document.getElementById("logTable").innerHTML=sessionTable(s,w);
+document.getElementById("logDate").value ||= new Date().toISOString().slice(0,10);
+document.getElementById("history").innerHTML=state.logs.length?state.logs.slice().reverse().map((x,i)=>`<div class="note"><b>${x.date} · Week ${x.week} · Session ${x.session}</b> · RPE ${x.rpe||"—"} · BW ${x.bw||"—"} kg<br>${x.rows.map(r=>r.name+": "+(r.load||"—")+" kg × "+(r.actual||"—")).join(" · ")}</div>`).join(""):"<p class='muted'>No workouts logged yet.</p>";
+}
+
+function currentWorkout(){
+  const d=new Date().getDay();
+  return d===1?"A":d===3?"B":d===5?"C":(state.active?.session||"A");
+}
+function startWorkout(s=currentWorkout()){
+  state.active={week:state.week,session:s,index:0,started:new Date().toISOString(),rows:sessions[s].map(e=>({name:e[0],load:"",actual:"",rir:""})),note:""};
+  save(); showWorkout();
+}
+function showWorkout(){
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll("section").forEach(x=>x.classList.add("hide"));
+  document.getElementById("workout").classList.remove("hide");
+  const a=state.active;if(!a)return;
+  const ex=a.rows[a.index], def=sessions[a.session][a.index];
+  document.getElementById("workoutTitle").textContent=`Session ${a.session} · Week ${a.week}`;
+  document.getElementById("workoutProgress").textContent=`Exercise ${a.index+1} of ${a.rows.length}`;
+  document.getElementById("exerciseCard").innerHTML=`
+    <div class="pill">Target: ${def[1]} sets × ${def[2]} reps</div>
+    <h2 style="font-size:24px;margin:12px 0">${ex.name}</h2>
+    <div class="grid">
+      <label>Weight (kg)<input id="activeLoad" type="number" inputmode="decimal" step="0.5" value="${ex.load}" placeholder="e.g. 80"></label>
+      <label>Reps completed<input id="activeActual" type="text" inputmode="decimal" value="${ex.actual}" placeholder="8, 8, 7"></label>
+      <label>RIR<input id="activeRir" type="number" inputmode="decimal" min="0" max="5" step="0.5" value="${ex.rir}" placeholder="${targetRIR(a.week)}"></label>
+    </div>
+    <div class="note">This week: <b>${targetRIR(a.week)} RIR</b>. Stop before technique breaks down.</div>`;
+  document.getElementById("prevExercise").disabled=a.index===0;
+  document.getElementById("nextExercise").textContent=a.index===a.rows.length-1?"Finish ✓":"Next →";
+  document.getElementById("sessionNote").value=a.note||"";
+  setTimeout(()=>document.getElementById("activeLoad")?.focus(),50);
+}
+function saveActiveExercise(){
+  const a=state.active;if(!a)return;
+  const r=a.rows[a.index];
+  r.load=document.getElementById("activeLoad")?.value||"";
+  r.actual=document.getElementById("activeActual")?.value||"";
+  r.rir=document.getElementById("activeRir")?.value||"";
+  a.note=document.getElementById("sessionNote")?.value||"";
+}
+function finishWorkout(){
+  saveActiveExercise();const a=state.active;if(!a)return;
+  state.logs.push({week:a.week,session:a.session,date:new Date().toISOString().slice(0,10),bw:"",rpe:"",note:a.note,rows:a.rows});
+  const done=state.logs.filter(x=>x.week===a.week).length;
+  if(done>=3 && state.week===a.week && state.week<12)state.week++;
+  state.active=null;save();
+  alert("Workout saved ✓");
+  document.querySelector('[data-tab="dashboard"]').click();
+}
+function renderDash(){
+ document.getElementById("wk").textContent=state.week+" / 12";
+ document.getElementById("sessions").textContent=state.logs.length;
+ document.getElementById("completion").textContent=Math.min(100,Math.round(state.logs.length/36*100))+"%";
+ let last=[...state.logs].reverse().find(x=>x.bw);
+ document.getElementById("dashWeight").textContent=last?last.bw+" kg":"—";
+ const s=currentWorkout(), p=phases[phase(state.week)];
+ document.getElementById("todayTitle").textContent=`Session ${s}`;
+ document.getElementById("todayMeta").textContent=`Week ${state.week} · ${p[1]} · ${p[2]} RIR`;
+ document.getElementById("today").innerHTML=sessions[s].map(x=>`<div class="note"><b>${x[0]}</b> · ${x[1]} × ${x[2]}</div>`).join("");
+}
+function renderSettings(){
+document.getElementById("startWeek").innerHTML=Array.from({length:12},(_,i)=>`<option ${state.week===i+1?"selected":""}>${i+1}</option>`).join("");
+document.getElementById("steps").value=state.settings.steps;document.getElementById("protein").value=state.settings.protein;document.getElementById("weight").value=state.settings.weight;
+}
+function renderAll(){renderDash();renderPlan();renderLog();renderSettings()}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");["dashboard","plan","log","settings"].forEach(id=>document.getElementById(id).classList.toggle("hide",id!==b.dataset.tab));if(b.dataset.tab==="log")renderLog()});
+document.getElementById("logWeek").innerHTML=Array.from({length:12},(_,i)=>`<option>${i+1}</option>`).join("");document.getElementById("logWeek").value=state.week;
+document.getElementById("logWeek").onchange=renderLog;document.getElementById("logSession").onchange=renderLog;
+document.getElementById("saveLog").onclick=()=>{
+let w=+document.getElementById("logWeek").value,s=document.getElementById("logSession").value;
+let loads=[...document.querySelectorAll(".load")],acts=[...document.querySelectorAll(".actual")];
+state.logs.push({week:w,session:s,date:document.getElementById("logDate").value,bw:document.getElementById("logBW").value,rpe:document.getElementById("logRPE").value,rows:sessions[s].map((e,i)=>({name:e[0],load:loads[i].value,actual:acts[i].value}))});
+if(w>=state.week && state.logs.filter(x=>x.week===w).length>=3 && state.week<12)state.week=w+1;
+save();document.getElementById("logWeek").value=state.week;alert("Workout saved ✓");
+};
+document.getElementById("clearLog").onclick=renderLog;
+document.getElementById("saveSettings").onclick=()=>{state.week=+document.getElementById("startWeek").value;state.settings.steps=+document.getElementById("steps").value||9000;state.settings.protein=+document.getElementById("protein").value||160;state.settings.weight=document.getElementById("weight").value;save();alert("Settings saved ✓")};
+document.getElementById("resetAll").onclick=()=>{if(confirm("Delete all workout history and settings?")){localStorage.removeItem("comeback12");location.reload()}};
+
+document.getElementById("startWorkout").onclick=()=>startWorkout(currentWorkout());
+document.getElementById("nextExercise").onclick=()=>{
+ saveActiveExercise();
+ if(state.active.index<state.active.rows.length-1){state.active.index++;save();showWorkout()}else finishWorkout();
+};
+document.getElementById("prevExercise").onclick=()=>{saveActiveExercise();if(state.active.index>0){state.active.index--;save();showWorkout()}};
+document.getElementById("finishWorkout").onclick=()=>{if(confirm("Finish and save this workout?"))finishWorkout()};
+document.getElementById("sessionNote").oninput=()=>{if(state.active){state.active.note=document.getElementById("sessionNote").value;localStorage.setItem("comeback12",JSON.stringify(state))}};
+document.getElementById("exportData").onclick=()=>{
+ const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="12-week-training-backup.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+};
+document.getElementById("importData").onclick=()=>document.getElementById("importFile").click();
+document.getElementById("importFile").onchange=(e)=>{
+ const f=e.target.files[0];if(!f)return;const r=new FileReader();
+ r.onload=()=>{try{state=JSON.parse(r.result);save();alert("Backup restored ✓")}catch(err){alert("That backup file could not be read.")}};
+ r.readAsText(f);
+};
+renderAll(); if(state.active){ /* resume available from dashboard via Start workout only */ }
+</script>
+</body></html>
